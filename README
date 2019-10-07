@@ -1,0 +1,11 @@
+```
+Bookmark Manager - User Stories
+
+As a user,
+So that I can access my favourite websites quickly,
+I would like to see a list of all my bookmarks.
+
+Classes         Methods
+BookmarkList    display_all
+Bookmark
+```
