@@ -13,9 +13,10 @@ I would like to add the site's address and title to bookmark manager
 
 ## Domain Model ##
 ```
-Classes         Methods
-BookmarkList    display_all
-Bookmark
+| Classes      | Methods      |
+|--------------|--------------|
+| BookmarkList | display_all  |
+| Bookmark     |              |
 ```
 
 ## Setting Up Database: ##
