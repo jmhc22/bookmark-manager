@@ -1,6 +1,7 @@
 require 'bookmark'
-describe Bookmark do
+require_relative 'setup_test_table'
 
+describe Bookmark do
   let(:google) { described_class.new("http://www.google.com") }
 
   it "has a URL" do
@@ -9,6 +10,7 @@ describe Bookmark do
 
   describe '.all' do
     it 'contains a list of bookmarks' do
+      setup_test_database_table
       bookmarks = Bookmark.all
       expect(bookmarks).to include("http://www.google.com")
       expect(bookmarks).to include("http://www.makersacademy.com")
