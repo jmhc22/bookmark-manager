@@ -28,6 +28,12 @@ class Bookmark
     Bookmark.new(id: result['id'], title: result['title'], url: result['url'])
   end
 
+  def self.find(id:)
+    connection = choose_connection
+    result = connection.exec("SELECT * FROM bookmarks WHERE id = '#{id}';").first
+    Bookmark.new(id: result['id'], title: result['title'], url: result['url'])
+  end
+
   attr_reader :id, :title, :url
   def initialize(id:, title:, url:)
     @id = id
