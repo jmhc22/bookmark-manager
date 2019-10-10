@@ -6,11 +6,12 @@
 }
 </style>
 <h1>Bookmark Manager</h1>
-
 <form action="/bookmarks/new" method="get">
   <input type="submit" value="New">
 </form>
-
+<p>
+  <%= flash[:notice] %>
+</p>
 <ul>
   <% @bookmarks.each do |bookmark| %>
     <li class="bookmark" id="bookmark-<%= bookmark.id %>">
