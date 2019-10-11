@@ -23,8 +23,9 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks' do
-    flash[:notice] = "You must submit a valid URL." unless Bookmark.create(url: params[:url], title: params[:title])
-    redirect('/bookmarks')
+    redirect('/bookmarks') if Bookmark.create(url: params[:url], title: params[:title])
+    flash[:notice] = "You must submit a valid URL."
+    redirect '/bookmarks/new'
   end
 
   delete '/bookmarks/:id' do
@@ -38,7 +39,19 @@ class BookmarkManager < Sinatra::Base
   end
 
   patch '/bookmarks/:id' do
-    Bookmark.update(id: params[:id], title: params[:title], url: params[:url])
+    redirect '/bookmarks' if Bookmark.update(id: params[:id], title: params[:title], url: params[:url])
+    flash[:notice] = "You must submit a valid URL."
+    redirect "/bookmarks/#{params[:id]}/edit"
+  end
+
+  get '/bookmarks/:id/comments/new' do
+    @bookmark_id = params[:id]
+    erb :'comments/new'
+  end
+
+  post '/bookmarks/:id/comments' do
+    connection = PG.connect(dbname: 'bookmark_manager_test')
+    connection.exec("INSERT INTO comments (text, bookmark_id) VALUES('#{params[:comment]}', '#{params[:id]}');")
     redirect '/bookmarks'
   end
 

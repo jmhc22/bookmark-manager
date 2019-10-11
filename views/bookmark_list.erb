@@ -9,9 +9,6 @@
 <form action="/bookmarks/new" method="get">
   <input type="submit" value="New">
 </form>
-<p>
-  <%= flash[:notice] %>
-</p>
 <ul>
   <% @bookmarks.each do |bookmark| %>
     <li class="bookmark" id="bookmark-<%= bookmark.id %>">
@@ -22,9 +19,13 @@
         <input type='hidden' name='_method' value='DELETE'/>
         <input type="submit" value="Delete" />
       </form>
+      <form action="/bookmarks/<%= bookmark.id %>/comments/new" method="get">
+        <input type="submit" value="Add Comment" />
+      </form>
       <a href=<%= bookmark.url %> target="_blank">
         <%= bookmark.title %>
       </a>
+
     </li>
   <% end %>
 </ul>
