@@ -1,4 +1,5 @@
 require 'pg'
+require_relative '../lib/database_connection'
 
 def setup_test_database_table
   Bookmark.create(url: "http://www.makersacademy.com", title: "Makers")
@@ -6,8 +7,6 @@ def setup_test_database_table
   Bookmark.create(url: "http://www.google.com", title: "Google")
 end
 
-def persisted_data(id:)
-  connection = PG.connect(dbname: 'bookmark_manager_test')
-  result = connection.query("SELECT * FROM bookmarks WHERE id = #{id};")
-  result.first
+def persisted_data(id:, table:)
+  DatabaseConnection.query("SELECT * FROM #{table} WHERE id = '#{id}';").first
 end

@@ -25,7 +25,13 @@
       <a href=<%= bookmark.url %> target="_blank">
         <%= bookmark.title %>
       </a>
-
+      <br>
+      <ul>
+        <% bookmark.comments.each do |comment| %>
+          <li><%= comment.text %></li>
+        <% end %>
+      </ul>
+      <br>
     </li>
   <% end %>
 </ul>

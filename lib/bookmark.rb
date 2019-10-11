@@ -1,4 +1,5 @@
 require_relative 'database_connection'
+require_relative 'comment'
 require 'uri'
 
 class Bookmark
@@ -17,6 +18,7 @@ class Bookmark
   end
 
   def self.delete(id:)
+    Comment.delete(bookmark_id: id)
     DatabaseConnection.query("DELETE FROM bookmarks WHERE id = #{id}")
   end
 
@@ -40,5 +42,9 @@ class Bookmark
 
   def self.is_url?(url)
     url =~ /\A#{URI::regexp(['http', 'https'])}\z/
+  end
+
+  def comments(comment_class: Comment)
+    comment_class.where(bookmark_id: id)
   end
 end
