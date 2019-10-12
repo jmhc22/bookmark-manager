@@ -12,6 +12,10 @@
 <ul>
   <% @bookmarks.each do |bookmark| %>
     <li class="bookmark" id="bookmark-<%= bookmark.id %>">
+      <a href=<%= bookmark.url %> target="_blank">
+        <%= bookmark.title %>
+      </a>
+      <br>
       <form action="/bookmarks/<%= bookmark.id %>/edit" method="get">
         <input type="submit" value="Edit" />
       </form>
@@ -22,10 +26,15 @@
       <form action="/bookmarks/<%= bookmark.id %>/comments/new" method="get">
         <input type="submit" value="Add Comment" />
       </form>
-      <a href=<%= bookmark.url %> target="_blank">
-        <%= bookmark.title %>
-      </a>
-      <br>
+      <form action="/bookmarks/<%= bookmark.id %>/tags/new" method="get">
+        <input type="submit" value="Add Tag" />
+      </form>
+      <p>
+        <% if !bookmark.tags.empty? %> Tags: <% end %>
+        <% bookmark.tags.each do |tag| %>
+          #<%= tag.text %>
+        <% end %>
+      </p>
       <ul>
         <% bookmark.comments.each do |comment| %>
           <li><%= comment.text %></li>

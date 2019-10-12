@@ -1,0 +1,12 @@
+<style>
+  * {
+  font-family: "Courier new", Times, serif;
+  }
+</style>
+<form action="/bookmarks" method="get">
+  <input type="submit" value="Back">
+</form>
+<form action="/bookmarks/<%= @bookmark_id %>/tags" method="post">
+  <input type="text" name="tag" placeholder="Add Tag" />
+  <input type="submit" value="Submit" />
+</form>
